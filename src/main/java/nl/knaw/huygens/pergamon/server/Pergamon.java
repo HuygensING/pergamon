@@ -1,6 +1,7 @@
 package nl.knaw.huygens.pergamon.server;
 
 import io.dropwizard.Application;
+import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -18,6 +19,7 @@ public class Pergamon extends Application<PergamonConfiguration> {
 
   @Override
   public void initialize(Bootstrap<PergamonConfiguration> bootstrap) {
+    bootstrap.addBundle(new Java8Bundle());
   }
 
   @Override
