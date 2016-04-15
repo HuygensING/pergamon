@@ -36,6 +36,7 @@
     <!-- code dependencies -->
     <dropwizard.version>0.9.2</dropwizard.version>
     <hamcrest-library.version>1.3</hamcrest-library.version>
+    <log.version>1.1.1</log.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.9.0</mockito.version>
 
@@ -57,6 +58,11 @@
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-java8</artifactId>
       <version>0.9.0-1</version>
+    </dependency>
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>log</artifactId>
+      <version>${log.version}</version>
     </dependency>
     <!-- ## End of main dependencies ## -->
 
@@ -93,8 +99,8 @@
       <scope>test</scope>
       <exclusions>
         <exclusion>
-	  <groupId>org.hamcrest</groupId>
-	  <artifactId>hamcrest-core</artifactId>
+          <groupId>org.hamcrest</groupId>
+          <artifactId>hamcrest-core</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -107,87 +113,104 @@
     <!-- ## End of test dependencies -->
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>huygens</id>
+      <url>http://maven.huygens.knaw.nl/repository/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-	<version>${maven-compiler.version}</version>
-	<configuration>
-	  <source>${jdk.version}</source>
-	  <target>${jdk.version}</target>
-	</configuration>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
       </plugin>
 
       <plugin>
-	<groupId>org.codehaus.mojo</groupId>
+        <groupId>org.codehaus.mojo</groupId>
         <artifactId>appassembler-maven-plugin</artifactId>
-	<version>${appassembler.version}</version>
-	<executions>
-	  <execution>
-	    <phase>package</phase>
-	    <goals>
-	      <goal>assemble</goal>
-	    </goals>
-	  </execution>
-	</executions>
-	<configuration>
-	  <programs>
-	    <program>
-	      <id>pergamon</id>
-	      <mainClass>nl.knaw.huygens.pergamon.server.Pergamon</mainClass>
-	    </program>
-	  </programs>
-	</configuration>
+        <version>${appassembler.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <programs>
+            <program>
+              <id>pergamon</id>
+              <mainClass>nl.knaw.huygens.pergamon.server.Pergamon</mainClass>
+            </program>
+          </programs>
+        </configuration>
       </plugin>
 
       <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-	<version>${maven-checkstyle-plugin.version}</version>
-	<executions>
-	  <execution>
-	    <id>validate</id>
-	    <phase>validate</phase>
-	    <goals>
-	      <goal>check</goal>
-	    </goals>
-	    <configuration>
-	      <configLocation>src/main/resources/checkstyle_config.xml</configLocation>
-	      <includeTestSourceDirectory>true</includeTestSourceDirectory>
-	      <encoding>${encoding}</encoding>
-	      <consoleOutput>true</consoleOutput>
-	      <failsOnError>true</failsOnError>
-	    </configuration>
-	  </execution>
-	</executions>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <configLocation>src/main/resources/checkstyle_config.xml</configLocation>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <encoding>${encoding}</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
         <groupId>pl.project13.maven</groupId>
-	<artifactId>git-commit-id-plugin</artifactId>
-	<version>2.2.1</version>
-	<executions>
-	  <execution>
-	    <goals>
-	      <goal>revision</goal>
-	    </goals>
-	  </execution>
-	</executions>
-	<configuration>
-	  <prefix>git</prefix>
-	  <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
-	  <generateGitPropertiesFile>true</generateGitPropertiesFile>
-	  <generateGitPropertiesFilename>${project.build.outputDirectory/git.properties}</generateGitPropertiesFilename>
-	  <format>properties</format>
-	  <failOnNoGitDirectory>false</failOnNoGitDirectory>
-	  <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
-	  <skip>false</skip>
-	  <includeOnlyProperties>
-	    <includeOnlyProperty>^git.branch$</includeOnlyProperty>
-	    <includeOnlyProperty>^git.commit.id$</includeOnlyProperty>
-	    <includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
-	  </includeOnlyProperties>
-	</configuration>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <prefix>git</prefix>
+          <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory/git.properties}</generateGitPropertiesFilename>
+          <format>properties</format>
+          <failOnNoGitDirectory>false</failOnNoGitDirectory>
+          <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+          <skip>false</skip>
+          <includeOnlyProperties>
+            <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+            <includeOnlyProperty>^git.commit.id$</includeOnlyProperty>
+            <includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+          </includeOnlyProperties>
+        </configuration>
       </plugin>
     </plugins>
   </build>
