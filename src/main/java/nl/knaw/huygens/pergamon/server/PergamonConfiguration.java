@@ -1,4 +1,6 @@
 package nl.knaw.huygens.pergamon.server;
 
-public class PergamonConfiguration {
+import io.dropwizard.Configuration;
+
+public class PergamonConfiguration extends Configuration {
 }
