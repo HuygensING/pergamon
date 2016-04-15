@@ -1,6 +1,7 @@
 package nl.knaw.huygens.pergamon.server;
 
 import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 import nl.knaw.huygens.Log;
@@ -11,7 +12,16 @@ public class Pergamon extends Application<PergamonConfiguration> {
   }
 
   @Override
+  public String getName() {
+    return "Pergamon";
+  }
+
+  @Override
+  public void initialize(Bootstrap<PergamonConfiguration> bootstrap) {
+  }
+
+  @Override
   public void run(PergamonConfiguration pergamonConfiguration, Environment environment) throws Exception {
-    Log.debug("Pergamon started");
+    Log.warn("Pergamon started: config.name=[{}]", pergamonConfiguration.getName());
   }
 }
