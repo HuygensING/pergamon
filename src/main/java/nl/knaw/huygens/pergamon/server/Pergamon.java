@@ -24,6 +24,6 @@ public class Pergamon extends Application<PergamonConfiguration> {
 
   @Override
   public void run(PergamonConfiguration pergamonConfiguration, Environment environment) throws Exception {
-    Log.warn("Pergamon started: config.name=[{}]", pergamonConfiguration.getName());
+    Log.info("Pergamon started: config.name=[{}]", pergamonConfiguration.getName());
   }
 }
