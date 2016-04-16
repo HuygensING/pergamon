@@ -157,7 +157,7 @@
           <programs>
             <program>
               <id>pergamon</id>
-              <mainClass>nl.knaw.huygens.pergamon.server.Pergamon</mainClass>
+              <mainClass>nl.knaw.huygens.pergamon.server.PergamonApplication</mainClass>
             </program>
           </programs>
         </configuration>
@@ -200,7 +200,7 @@
           <prefix>git</prefix>
           <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
           <generateGitPropertiesFile>true</generateGitPropertiesFile>
-          <generateGitPropertiesFilename>${project.build.outputDirectory/git.properties}</generateGitPropertiesFilename>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
           <format>properties</format>
           <failOnNoGitDirectory>false</failOnNoGitDirectory>
           <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
