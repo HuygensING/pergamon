@@ -21,6 +21,7 @@ logging:
   loggers:
     "nl.knaw.huygens.pergamon": TRACE
     "org.apache.solr": WARN
+    "org.eclipse.jetty": WARN
 
 # Server settings
 server:
