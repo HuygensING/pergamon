@@ -3,19 +3,26 @@ name: Anonymous
 # Logging settings
 logging:
   appenders:
+    - type: console
+      threshold: WARN
+      target: stderr
+
     - type: file
       currentLogFilename: /tmp/pergamon.log
-      threshold: all
+      threshold: ALL
       archive: true
-      archivedLogFilenamePattern: /tmp/pergamon.log.%d
+      archivedLogFilenamePattern: /tmp/pergamon.log.%d.gz
       archivedFileCount: 10
       timeZone: 10
-      logFormat: "- %d %-5p  %m [%c{60}] %marker %mdc %ex%n"
-  level: INFO
-  loggers:
-    "org.apache.solr": WARN
-    "nl.knaw.huygens.pergamon": TRACE
+#      logFormat: "%d %-5p  %m [%c{60}] %marker %mdc %ex%n"
 
+  level: INFO
+
+  loggers:
+    "nl.knaw.huygens.pergamon": TRACE
+    "org.apache.solr": WARN
+
+# Server settings
 server:
   applicationConnectors:
     - type: http
