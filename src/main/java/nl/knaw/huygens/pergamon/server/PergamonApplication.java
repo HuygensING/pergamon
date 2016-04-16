@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import org.glassfish.jersey.filter.LoggingFilter;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.dropwizard.Application;
 import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
@@ -38,5 +39,6 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
 
     environment.jersey().register(new AboutResource());
     environment.jersey().register(new LoggingFilter());
+    environment.jersey().register(new JacksonJsonProvider());
   }
 }
