@@ -25,15 +25,4 @@ public class AboutResource {
     return Response.ok().entity(gitProperties).build();
   }
 
-  private class AboutInfo {
-    private final String msg;
-
-    AboutInfo(String msg) {
-      this.msg = msg;
-    }
-
-    public String getMsg() {
-      return msg;
-    }
-  }
 }
