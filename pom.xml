@@ -157,7 +157,7 @@
           <programs>
             <program>
               <id>pergamon</id>
-              <mainClass>nl.knaw.huygens.pergamon.server.PergamonApplication</mainClass>
+              <mainClass>nl.knaw.huygens.pergamon.PergamonApplication</mainClass>
             </program>
           </programs>
         </configuration>

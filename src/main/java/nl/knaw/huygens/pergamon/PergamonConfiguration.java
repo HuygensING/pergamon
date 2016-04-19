@@ -1,16 +1,16 @@
-package nl.knaw.huygens.pergamon.server;
+package nl.knaw.huygens.pergamon;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 
-public class PergamonConfiguration extends Configuration {
+class PergamonConfiguration extends Configuration {
   @NotEmpty
   private String name;
 
   @JsonProperty
-  public String getName() {
+  String getName() {
     return name;
   }
 

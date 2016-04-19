@@ -1,4 +1,4 @@
-package nl.knaw.huygens.pergamon.server;
+package nl.knaw.huygens.pergamon;
 
 import java.util.Properties;
 
