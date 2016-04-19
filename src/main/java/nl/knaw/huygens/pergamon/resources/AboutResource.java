@@ -6,9 +6,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.codahale.metrics.annotation.Metered;
+
+import nl.knaw.huygens.pergamon.api.About;
 
 @Path("/about")
 public class AboutResource {
@@ -21,8 +22,8 @@ public class AboutResource {
   @GET
   @Metered
   @Produces(MediaType.APPLICATION_JSON)
-  public Response get() {
-    return Response.ok().entity(gitProperties).build();
+  public About get() {
+    return About.fromGitProperties(gitProperties);
   }
 
 }
