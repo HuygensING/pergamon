@@ -6,9 +6,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.codahale.metrics.annotation.Metered;
+
 @Path("/about")
 public class AboutResource {
   @GET
+  @Metered
   @Produces(MediaType.APPLICATION_JSON)
   public Response get() {
     return Response.ok().entity(new AboutInfo("about")).build();
