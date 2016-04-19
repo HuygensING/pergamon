@@ -6,6 +6,7 @@ import org.glassfish.jersey.filter.LoggingFilter;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -27,6 +28,7 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
   @Override
   public void initialize(Bootstrap<PergamonConfiguration> bootstrap) {
     bootstrap.addBundle(new Java8Bundle());
+    bootstrap.addBundle(new AssetsBundle());
   }
 
   @Override
