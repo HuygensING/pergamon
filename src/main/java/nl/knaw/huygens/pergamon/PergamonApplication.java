@@ -11,6 +11,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 import nl.knaw.huygens.Log;
+import nl.knaw.huygens.pergamon.health.AboutHealthCheck;
 import nl.knaw.huygens.pergamon.resources.AboutResource;
 
 public class PergamonApplication extends Application<PergamonConfiguration> {
@@ -36,6 +37,8 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
     Log.info("Launching Pergamon version: {}", version);
 
     Log.trace("config.name=[{}]", pergamonConfiguration.getName());
+
+    environment.healthChecks().register("about", new AboutHealthCheck());
 
     environment.jersey().register(new AboutResource());
     environment.jersey().register(new LoggingFilter());
