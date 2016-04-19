@@ -42,7 +42,7 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
 
     environment.healthChecks().register("about", new AboutHealthCheck());
 
-    environment.jersey().register(new AboutResource());
+    environment.jersey().register(new AboutResource(gitProperties));
     environment.jersey().register(new LoggingFilter());
     environment.jersey().register(new JacksonJsonProvider());
   }
