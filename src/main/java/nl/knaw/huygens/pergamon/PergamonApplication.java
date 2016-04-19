@@ -27,8 +27,8 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
 
   @Override
   public void initialize(Bootstrap<PergamonConfiguration> bootstrap) {
-    bootstrap.addBundle(new Java8Bundle());
     bootstrap.addBundle(new AssetsBundle());
+    bootstrap.addBundle(new Java8Bundle());
   }
 
   @Override
