@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 
-class PergamonConfiguration extends Configuration {
+public class PergamonConfiguration extends Configuration {
   @NotEmpty
   private String name;
 
