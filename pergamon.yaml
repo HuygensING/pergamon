@@ -13,8 +13,6 @@ logging:
       archive: true
       archivedLogFilenamePattern: /tmp/pergamon.log.%d.gz
       archivedFileCount: 10
-      timeZone: 10
-#      logFormat: "%d %-5p  %m [%c{60}] %marker %mdc %ex%n"
 
   level: INFO
 
