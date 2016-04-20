@@ -18,6 +18,7 @@ import nl.knaw.huygens.pergamon.api.About;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AboutResourceTest {
+  private static final String DUMMY_COMMIT_ID = "a82fc896adc0a49b41dcf85d646825edb8273498";
   private static final Properties GIT = mock(Properties.class);
 
   @ClassRule
@@ -25,14 +26,13 @@ public class AboutResourceTest {
 
   @Test
   public void getsReturnGitProperties() throws Exception {
-    final String dummyCommitId = "0xdeadbeef";
-    when(GIT.getProperty("git.commit.id")).thenReturn(dummyCommitId);
+    when(GIT.getProperty("git.commit.id")).thenReturn(DUMMY_COMMIT_ID);
 
     final About response = resources.client().target("/about")//
-                                       .request()//
-                                       .get(About.class);
+                                    .request()//
+                                    .get(About.class);
 
-    assertThat(response.getCommitId()).isEqualTo(dummyCommitId);
+    assertThat(response.getCommitId()).isEqualTo(DUMMY_COMMIT_ID);
   }
 
 }
