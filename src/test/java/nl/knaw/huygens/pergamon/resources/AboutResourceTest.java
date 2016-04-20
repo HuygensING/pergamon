@@ -1,5 +1,6 @@
 package nl.knaw.huygens.pergamon.resources;
 
+import static io.dropwizard.testing.junit.ResourceTestRule.builder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,19 +21,18 @@ public class AboutResourceTest {
   private static final Properties GIT = mock(Properties.class);
 
   @ClassRule
-  public static final ResourceTestRule resources //
-      = ResourceTestRule.builder().addResource(new AboutResource(GIT)).build();
+  public static final ResourceTestRule resources = builder().addResource(new AboutResource(GIT)).build();
 
   @Test
   public void getsReturnGitProperties() throws Exception {
-    final String fauxCommitId = "0xdeadbeef";
-    when(GIT.getProperty("git.commit.id")).thenReturn(fauxCommitId);
+    final String dummyCommitId = "0xdeadbeef";
+    when(GIT.getProperty("git.commit.id")).thenReturn(dummyCommitId);
 
     final About response = resources.client().target("/about")//
                                        .request()//
                                        .get(About.class);
 
-    assertThat(response.getCommitId()).isEqualTo(fauxCommitId);
+    assertThat(response.getCommitId()).isEqualTo(dummyCommitId);
   }
 
 }
