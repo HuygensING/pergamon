@@ -14,12 +14,15 @@ logging:
       archivedLogFilenamePattern: /tmp/pergamon.log.%d.gz
       archivedFileCount: 10
 
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
   level: INFO
 
+  # Logger-specific levels.
   loggers:
     "nl.knaw.huygens.pergamon": TRACE
     "org.apache.solr": WARN
     "org.eclipse.jetty": WARN
+    "org.glassfish.jersey.logging.LoggingFeature": DEBUG # for HTTP requests
 
 # Server settings
 server:

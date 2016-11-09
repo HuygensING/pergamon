@@ -1,19 +1,16 @@
 package nl.knaw.huygens.pergamon;
 
-import java.util.Properties;
-
-import org.glassfish.jersey.filter.LoggingFilter;
-
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
 import nl.knaw.huygens.Log;
 import nl.knaw.huygens.pergamon.health.AboutHealthCheck;
 import nl.knaw.huygens.pergamon.resources.AboutResource;
+import org.glassfish.jersey.logging.LoggingFeature;
+
+import java.util.Properties;
 
 public class PergamonApplication extends Application<PergamonConfiguration> {
   public static void main(String... args) throws Exception {
@@ -28,7 +25,6 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
   @Override
   public void initialize(Bootstrap<PergamonConfiguration> bootstrap) {
     bootstrap.addBundle(new AssetsBundle());
-    bootstrap.addBundle(new Java8Bundle());
   }
 
   @Override
@@ -42,8 +38,8 @@ public class PergamonApplication extends Application<PergamonConfiguration> {
 
     environment.healthChecks().register("about", new AboutHealthCheck());
 
+    environment.jersey().register(LoggingFeature.class);
     environment.jersey().register(new AboutResource(gitProperties));
-    environment.jersey().register(new LoggingFilter());
     environment.jersey().register(new JacksonJsonProvider());
   }
 }
